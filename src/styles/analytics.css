@@ -1,0 +1,808 @@
+/* ==========================================================================
+   IN MOTION — Analytics & Insights Module Styles
+   Enterprise SaaS Control Center: Dark Charcoal (#0B0D10) + Lime-Green (#9BEF35)
+   ========================================================================== */
+
+/* Main Analytics Container */
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 28px 36px 56px;
+  animation: fadeIn 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Analytics Header
+   -------------------------------------------------------------------------- */
+.analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+
+.analytics-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analytics-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.analytics-main-title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border: 1px solid rgba(155, 239, 53, 0.22);
+}
+
+.telemetry-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--status-success);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.analytics-header-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.analytics-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Header Action Buttons (Export, Refresh) */
+.header-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-weight: 500;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius-btn);
+  transition: all var(--transition-fast);
+}
+
+.header-action-btn:hover {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-active);
+}
+
+.header-action-btn.active-action {
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+/* --------------------------------------------------------------------------
+   Global Date Range Filter (Pill Control)
+   -------------------------------------------------------------------------- */
+.date-range-filter-wrapper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-btn);
+  padding: 3px;
+  gap: 3px;
+  position: relative;
+}
+
+.date-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.date-filter-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface);
+}
+
+.date-filter-btn.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(155, 239, 53, 0.25);
+}
+
+/* Custom Date Range Popover */
+.custom-date-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 100;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  box-shadow: var(--shadow-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 290px;
+}
+
+.custom-date-popover-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-date-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.custom-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.custom-date-field label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.custom-date-field input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-btn);
+  padding: 7px 9px;
+  font-size: 12px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.custom-date-field input:focus {
+  border-color: var(--accent);
+}
+
+.custom-date-apply-btn {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: var(--radius-btn);
+  text-align: center;
+  transition: opacity var(--transition-fast);
+}
+
+.custom-date-apply-btn:hover {
+  opacity: 0.92;
+}
+
+/* --------------------------------------------------------------------------
+   Analytics Navigation Tabs
+   -------------------------------------------------------------------------- */
+.analytics-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.analytics-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.analytics-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-btn) var(--radius-btn) 0 0;
+  position: relative;
+  transition: all var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+
+.analytics-nav-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.analytics-nav-tab.active {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-bottom: 2px solid var(--accent);
+  font-weight: 600;
+}
+
+.analytics-nav-tab .tab-icon {
+  width: 16px;
+  height: 16px;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.analytics-nav-tab.active .tab-icon {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   KPI Cards & Grid (16px Border-Radius, Layered Charcoal, Soft Lime Highlights)
+   -------------------------------------------------------------------------- */
+.kpi-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+
+.kpi-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.kpi-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.kpi-grid.cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.kpi-grid.cols-6 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.analytics-kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.analytics-kpi-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kpi-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kpi-icon-box {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.analytics-kpi-card:hover .kpi-icon-box {
+  color: var(--accent);
+}
+
+.kpi-center-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kpi-value {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-trend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  line-height: 1.2;
+}
+
+.kpi-trend-pill.up {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border: 1px solid rgba(155, 239, 53, 0.2);
+}
+
+.kpi-trend-pill.down {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  border: 1px solid rgba(201, 121, 121, 0.2);
+}
+
+.kpi-trend-pill.neutral {
+  background: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+.kpi-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   Chart Cards & Grid
+   -------------------------------------------------------------------------- */
+.charts-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.charts-grid-full {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.charts-grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.charts-grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.chart-card:hover {
+  border-color: var(--border-active);
+}
+
+.chart-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chart-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.chart-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.chart-card-subtitle {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.chart-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-badge {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.chart-content-wrap {
+  width: 100%;
+  height: 280px;
+  position: relative;
+}
+
+.chart-content-wrap.tall {
+  height: 340px;
+}
+
+.chart-content-wrap.compact {
+  height: 240px;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Recharts Tooltip (Dark, High Contrast, Monospace values)
+   -------------------------------------------------------------------------- */
+.recharts-custom-tooltip {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-btn);
+  padding: 11px 15px;
+  box-shadow: var(--shadow-dropdown);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 150px;
+}
+
+.tooltip-header {
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 5px;
+  margin-bottom: 2px;
+}
+
+.tooltip-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.tooltip-label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.tooltip-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tooltip-value {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   Data Tables & Insights Cards
+   -------------------------------------------------------------------------- */
+.data-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-responsive-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.analytics-table th {
+  padding: 10px 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.analytics-table td {
+  padding: 13px 14px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.analytics-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.status-badge.good,
+.status-badge.active,
+.status-badge.delivered,
+.status-badge.on-time {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.status-badge.warning,
+.status-badge.fair,
+.status-badge.idle,
+.status-badge.delayed {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+}
+
+.status-badge.critical,
+.status-badge.maintenance,
+.status-badge.danger {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+/* --------------------------------------------------------------------------
+   Performance Storytelling Stepper
+   -------------------------------------------------------------------------- */
+.story-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+}
+
+.story-step-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.story-step-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Loading Skeletons
+   -------------------------------------------------------------------------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-surface) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+  border-radius: var(--radius-btn);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-kpi {
+  height: 115px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.skeleton-chart {
+  height: 320px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Empty & Error State Cards
+   -------------------------------------------------------------------------- */
+.analytics-state-card {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.state-icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.state-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.state-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+.state-btn {
+  margin-top: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: var(--radius-btn);
+  transition: all var(--transition-fast);
+}
+
+.state-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpi-grid.cols-5,
+  .kpi-grid.cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .charts-grid-2col,
+  .charts-grid-1-2,
+  .charts-grid-2-1 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-container {
+    padding: 18px 16px 40px;
+    gap: 20px;
+  }
+  .analytics-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .analytics-header-right {
+    justify-content: flex-start;
+  }
+  .kpi-grid,
+  .kpi-grid.cols-2,
+  .kpi-grid.cols-3,
+  .kpi-grid.cols-5,
+  .kpi-grid.cols-6 {
+    grid-template-columns: 1fr;
+  }
+  .kpi-value {
+    font-size: 26px;
+  }
+}
