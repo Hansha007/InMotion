@@ -2,7 +2,6 @@ import {
   Search,
   Bell,
   ChevronDown,
-  Circle,
 } from "lucide-react";
 
 function Topbar() {

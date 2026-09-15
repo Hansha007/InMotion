@@ -130,3 +130,86 @@ a {
 .inmotion-red {
   color: var(--red);
 }
+
+/* ================= HERO STAGGERED ENTRANCE ANIMATION ================= */
+@keyframes heroSettle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal-1 {
+  animation: heroSettle 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.hero-reveal-2 {
+  animation: heroSettle 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.hero-reveal-3 {
+  animation: heroSettle 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+}
+
+.hero-reveal-4 {
+  animation: heroSettle 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.hero-reveal-5 {
+  animation: heroSettle 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+}
+
+.hero-reveal-kpi {
+  animation: heroSettle 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.85s both;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+.live-pulse {
+  animation: livePulse 2.4s ease-out infinite;
+}
+
+@keyframes authModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-modal-panel {
+  animation: authModalEnter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal-1,
+  .hero-reveal-2,
+  .hero-reveal-3,
+  .hero-reveal-4,
+  .hero-reveal-5,
+  .hero-reveal-kpi,
+  .live-pulse {
+    animation: none;
+  }
+
+  .auth-modal-panel {
+    animation: none;
+  }
+}
