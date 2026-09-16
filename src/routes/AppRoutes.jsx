@@ -3,8 +3,17 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "../pages/landing/Landing";
 import MainLayout from "../layouts/MainLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
-import Shipments from "../pages/shipment/Shipments";
-import ShipmentDetails from "../pages/shipment/ShipmentDetails";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import Network from "../pages/network/Network";
+import Alerts from "../pages/alerts/Alerts";
+import Settings from "../pages/settings/Settings";
+import Fleet from "../pages/fleet/Fleet";
+import Warehouses from "../pages/warehouse/Warehouses";
+import RoutesPage from "../pages/network/Routes";
+import About from "../pages/about/About";
+import Analytics from "../pages/analytics/Analytics";
 
 function Placeholder({ name }) {
   return <h1>{name}</h1>;
@@ -18,15 +27,13 @@ function AppRoutes() {
 
       <Route path="/" element={<Landing />} />
 
-      <Route
-        path="/login"
-        element={<Placeholder name="Login" />}
-      />
+      <Route path="/about" element={<About />} />
 
-      <Route
-        path="/forgot-password"
-        element={<Placeholder name="Forgot Password" />}
-      />
+      <Route path="/login" element={<Login />} />
+
+      <Route path="/signup" element={<Signup />} />
+
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       <Route
         path="/access-denied"
@@ -45,6 +52,8 @@ function AppRoutes() {
           element={<Dashboard />}
         />
 
+        <Route path="about" element={<About />} />
+
 
         {/* ================= NETWORK ================= */}
 
@@ -52,7 +61,7 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Network" />}
+            element={<Network />}
           />
 
           <Route
@@ -62,12 +71,12 @@ function AppRoutes() {
 
           <Route
             path="routes"
-            element={<Placeholder name="Routes" />}
+            element={<RoutesPage />}
           />
 
           <Route
             path="routes/:routeId"
-            element={<Placeholder name="Route Details" />}
+            element={<RoutesPage />}
           />
 
         </Route>
@@ -77,8 +86,15 @@ function AppRoutes() {
 
         <Route path="shipments">
 
-          <Route index element={<Shipments />} />
-          <Route path=":shipmentId" element={<ShipmentDetails />} />
+          <Route
+            index
+            element={<Placeholder name="Shipments" />}
+          />
+
+          <Route
+            path=":shipmentId"
+            element={<Placeholder name="Shipment Details" />}
+          />
 
         </Route>
 
@@ -89,12 +105,12 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Fleet" />}
+            element={<Fleet />}
           />
 
           <Route
             path=":vehicleId"
-            element={<Placeholder name="Vehicle Details" />}
+            element={<Fleet />}
           />
 
         </Route>
@@ -106,12 +122,12 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Warehouses" />}
+            element={<Warehouses />}
           />
 
           <Route
             path=":warehouseId"
-            element={<Placeholder name="Warehouse Details" />}
+            element={<Warehouses />}
           />
 
         </Route>
@@ -121,7 +137,7 @@ function AppRoutes() {
 
         <Route
           path="alerts"
-          element={<Placeholder name="Alerts" />}
+          element={<Alerts />}
         />
 
         <Route
@@ -141,7 +157,7 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Analytics" />}
+            element={<Analytics />}
           />
 
           <Route
@@ -186,27 +202,28 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Settings" />}
+            element={<Settings />}
           />
 
           <Route
             path="profile"
-            element={<Placeholder name="Profile" />}
+            element={<Settings />}
           />
 
           <Route
             path="appearance"
-            element={<Placeholder name="Appearance" />}
+            element={<Settings />}
           />
 
           <Route
+          
             path="notifications"
-            element={<Placeholder name="Notification Settings" />}
+            element={<Settings />}
           />
 
           <Route
             path="roles"
-            element={<Placeholder name="Roles & Permissions" />}
+            element={<Settings />}
           />
 
         </Route>
