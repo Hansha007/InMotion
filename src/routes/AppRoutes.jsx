@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "../pages/landing/Landing";
 import MainLayout from "../layouts/MainLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Shipments from "../pages/shipment/Shipments";
+import ShipmentDetails from "../pages/shipment/ShipmentDetails";
 
 function Placeholder({ name }) {
   return <h1>{name}</h1>;
@@ -75,15 +77,8 @@ function AppRoutes() {
 
         <Route path="shipments">
 
-          <Route
-            index
-            element={<Placeholder name="Shipments" />}
-          />
-
-          <Route
-            path=":shipmentId"
-            element={<Placeholder name="Shipment Details" />}
-          />
+          <Route index element={<Shipments />} />
+          <Route path=":shipmentId" element={<ShipmentDetails />} />
 
         </Route>
 
