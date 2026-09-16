@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
+
 import Landing from "../pages/landing/Landing";
 import MainLayout from "../layouts/MainLayout";
+import Dashboard from "../pages/dashboard/Dashboard";
 import Shipments from "../pages/shipment/Shipments";
 import ShipmentDetails from "../pages/shipment/ShipmentDetails";
 
@@ -36,10 +38,11 @@ function AppRoutes() {
 
       <Route path="/app" element={<MainLayout />}>
 
-        {/* Dashboard */}
+        {/* ================= DASHBOARD ================= */}
+
         <Route
           path="dashboard"
-          element={<Placeholder name="Dashboard" />}
+          element={<Dashboard />}
         />
 
 
@@ -177,7 +180,8 @@ function AppRoutes() {
         />
 
 
-        {/* Settings */}
+        {/* ================= SETTINGS ================= */}
+
         <Route path="settings">
 
           <Route
