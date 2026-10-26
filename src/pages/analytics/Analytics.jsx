@@ -17,8 +17,34 @@ function RankedSection({ title, eyebrow, rows, warehouse = false }) { return <se
 function FleetPerformance() { return <section className="border-b border-[#18304A] py-6"><SectionTitle eyebrow="FLEET PERFORMANCE" title="Utilization by vehicle segment" /><div className="mt-5 grid gap-4 sm:grid-cols-2">{analyticsData.fleetPerformance.map((item) => <div key={item.label}><div className="flex justify-between text-[11px]"><span className="text-[#A7B3C2]">{item.label}</span><span className="text-white">{item.value}%</span></div><div className="mt-2 h-1 rounded-full bg-[#18304A]"><span className="block h-full bg-[#2196F3]" style={{ width: `${item.value}%` }} /></div></div>)}</div><div className="mt-6 flex flex-wrap gap-6 border-t border-[#18304A] pt-4 text-[11px]"><span className="text-[#7F91A5]">Fleet Availability <strong className="ml-2 text-white">84%</strong></span><span className="text-[#7F91A5]">Maintenance <strong className="ml-2 text-white">4.2%</strong></span><span className="text-[#7F91A5]">At Risk <strong className="ml-2 text-[#F97316]">3.3%</strong></span></div></section>; }
 function DelayAnalysis() { return <section className="border-b border-[#18304A] py-6"><SectionTitle eyebrow="DELAY ANALYSIS" title="Why are shipments delayed?" /><div className="mt-5 space-y-4">{analyticsData.delayReasons.map((item) => <div key={item.label} className="flex items-center gap-4 text-[11px]"><span className="w-36 shrink-0 text-[#A7B3C2]">{item.label}</span><div className="h-2 flex-1 rounded-full bg-[#18304A]"><span className="block h-full bg-[#2196F3]" style={{ width: `${item.value * 2.4}%` }} /></div><span className="w-10 text-right font-semibold text-white">{item.value}%</span></div>)}</div></section>; }
 function Insights() { return <section className="border-b border-[#18304A] py-6"><SectionTitle eyebrow="OPERATIONAL INSIGHTS" title="What should I notice?" /><div className="grid gap-x-8 gap-y-5 py-5 sm:grid-cols-2">{analyticsData.insights.map(([title, text, metric, color], index) => <div key={title} className="border-t border-[#18304A] pt-4"><div className="flex justify-between"><span className="text-[10px] tracking-[0.16em] text-[#38BDF8]">0{index + 1}</span><strong style={{ color }} className="text-[12px]">{metric}</strong></div><h3 className="mt-3 text-[12px] font-semibold text-white">{title}</h3><p className="mt-2 text-[11px] leading-5 text-[#7F91A5]">{text}</p></div>)}</div></section>; }
-function Comparison({ metrics }) { const rows = [["On-Time Delivery", metrics.onTime, "91.8%", "↑ 2.4%", true], ["Average Delay", metrics.delay, "23 min", "↓ 5 min", true], ["Completed Shipments", metrics.shipments, "1,176", "↑ 9.2%", true], ["Fleet Utilization", metrics.utilization, "74.9%", "↑ 3.5%", true]]; return <section className="py-6"><SectionTitle eyebrow="PERFORMANCE COMPARISON" title="This period vs previous period" /><div className="mt-3 divide-y divide-[#18304A]">{rows.map(([label, current, previous, change]) => <div key={label} className="grid grid-cols-[1fr_90px_90px_70px] gap-3 py-3 text-[11px]"><span className="text-[#A7B3C2]">{label}</span><span className="font-semibold text-white">{current}</span><span className="text-[#6F7D8E]">{previous}</span><span className="text-[#22C55E]">{change}</span></div>)}</div></section>; }
+function Comparison({ metrics }) {
+  const rows = [
+    ["On-Time Delivery", metrics.onTime, "91.8%", "↑ 2.4%"],
+    ["Average Delay", metrics.delay, "23 min", "↓ 5 min"],
+    ["Completed Shipments", metrics.shipments, "1,176", "↑ 9.2%"],
+    ["Fleet Utilization", metrics.utilization, "74.9%", "↑ 3.5%"],
+  ];
 
-function Analytics() { const [period, setPeriod] = useState("7d"); const [mode, setMode] = useState("volume"); const [region, setRegion] = useState("all"); const [status, setStatus] = useState("all"); const metrics = analyticsData.periods[period]; const routeRows = useMemo(() => analyticsData.routePerformance.filter((row) => status === "all" || row.status.toLowerCase() === status), [status]); return <main className="min-h-screen bg-[#020812] px-5 pb-12 pt-[98px] text-[#F5F7FA] lg:ml-[248px] lg:px-7"><div className="mx-auto max-w-[1500px]"><Header period={period} setPeriod={setPeriod} /><Filters region={region} setRegion={setRegion} status={status} setStatus={setStatus} /><Telemetry metrics={metrics} /><DeliveryPerformance data={analyticsData.deliveryPerformance[period]} /><div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_300px]"><ShipmentPerformance mode={mode} setMode={setMode} /><PerformanceBreakdown /></div><RankedSection eyebrow="ROUTE PERFORMANCE" title="Which routes are underperforming?" rows={routeRows} /><RankedSection eyebrow="WAREHOUSE PERFORMANCE" title="Which hubs are becoming bottlenecks?" rows={analyticsData.warehousePerformance} warehouse /><div className="grid grid-cols-1 gap-8 xl:grid-cols-2"><FleetPerformance /><DelayAnalysis /></div><Insights /><Comparison metrics={metrics} /></div></main>; }
+  return (
+    <section className="py-6">
+      <SectionTitle eyebrow="PERFORMANCE COMPARISON" title="This period vs previous period" />
+      <div className="mt-3 divide-y divide-[#18304A]">
+        {rows.map(([label, current, previous, change]) => (
+          <div
+            key={label}
+            className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto] gap-1 py-3 text-[10px] sm:gap-3 sm:text-[11px]"
+          >
+            <span className="min-w-0 text-[#A7B3C2]">{label}</span>
+            <span className="whitespace-nowrap font-semibold text-white">{current}</span>
+            <span className="whitespace-nowrap text-[#6F7D8E]">{previous}</span>
+            <span className="whitespace-nowrap text-[#22C55E]">{change}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Analytics() { const [period, setPeriod] = useState("7d"); const [mode, setMode] = useState("volume"); const [region, setRegion] = useState("all"); const [status, setStatus] = useState("all"); const metrics = analyticsData.periods[period]; const routeRows = useMemo(() => analyticsData.routePerformance.filter((row) => status === "all" || row.status.toLowerCase() === status), [status]); return <main className="min-h-screen min-w-0 bg-[#020812] px-5 pb-12 text-[#F5F7FA] lg:px-7"><div className="mx-auto max-w-[1500px]"><Header period={period} setPeriod={setPeriod} /><Filters region={region} setRegion={setRegion} status={status} setStatus={setStatus} /><Telemetry metrics={metrics} /><DeliveryPerformance data={analyticsData.deliveryPerformance[period]} /><div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_300px]"><ShipmentPerformance mode={mode} setMode={setMode} /><PerformanceBreakdown /></div><RankedSection eyebrow="ROUTE PERFORMANCE" title="Which routes are underperforming?" rows={routeRows} /><RankedSection eyebrow="WAREHOUSE PERFORMANCE" title="Which hubs are becoming bottlenecks?" rows={analyticsData.warehousePerformance} warehouse /><div className="grid grid-cols-1 gap-8 xl:grid-cols-2"><FleetPerformance /><DelayAnalysis /></div><Insights /><Comparison metrics={metrics} /></div></main>; }
 
 export default Analytics;

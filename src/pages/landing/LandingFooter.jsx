@@ -47,7 +47,7 @@ function FooterLinks({ title, links }) {
 function LandingFooter() {
   return (
     <footer className="border-t border-[#18304A] bg-[#020812]">
-      <div className="mx-auto max-w-[1440px] px-8 lg:px-12">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
         <div className="relative overflow-hidden border-b border-[#18304A] py-14 text-center lg:py-16">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2196F3]/[0.05] blur-[90px]" />
           <p className="relative text-[10px] font-semibold uppercase tracking-[0.24em] text-[#38BDF8]">

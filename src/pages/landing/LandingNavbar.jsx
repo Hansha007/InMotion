@@ -11,7 +11,7 @@ const navItems = [
 function LandingNavbar({ onLogin, onSignup }) {
   return (
     <header className="absolute left-0 right-0 top-0 z-50 border-b border-[#18304A]/50 bg-[#020812]/50 backdrop-blur-md">
-      <div className="mx-auto flex h-[70px] max-w-[1440px] items-center justify-between px-8">
+      <div className="mx-auto flex h-[70px] max-w-[1440px] items-center justify-between gap-2 px-4 sm:px-8">
         
         {/* Brand Logo */}
         <Link to="/" className="group flex items-center gap-3">
@@ -45,7 +45,7 @@ function LandingNavbar({ onLogin, onSignup }) {
             </svg>
           </div>
 
-          <span className="text-[17px] font-bold tracking-[0.14em] text-white">
+          <span className="text-[14px] font-bold tracking-[0.1em] text-white sm:text-[17px] sm:tracking-[0.14em]">
             INMOTION
           </span>
         </Link>
@@ -78,7 +78,7 @@ function LandingNavbar({ onLogin, onSignup }) {
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           
           {/* Network Live status */}
           <div className="hidden items-center gap-2 rounded-full border border-[#18304A]/60 bg-[#07111F]/60 px-3 py-1.5 backdrop-blur-sm sm:flex">
@@ -95,7 +95,7 @@ function LandingNavbar({ onLogin, onSignup }) {
           <button
             type="button"
             onClick={onLogin}
-            className="rounded-lg border border-[#1F334D] bg-[#07111F]/70 px-4 py-2 text-[12px] font-medium text-[#F5F7FA] backdrop-blur-sm transition-all duration-200 hover:border-[#2196F3]/50 hover:bg-[#0B182B]"
+            className="rounded-lg border border-[#1F334D] bg-[#07111F]/70 px-2.5 py-2 text-[11px] font-medium text-[#F5F7FA] backdrop-blur-sm transition-all duration-200 hover:border-[#2196F3]/50 hover:bg-[#0B182B] sm:px-4 sm:text-[12px]"
           >
             Login
           </button>
@@ -104,9 +104,10 @@ function LandingNavbar({ onLogin, onSignup }) {
           <button
             type="button"
             onClick={onSignup}
-            className="rounded-lg bg-[#1877F2] px-5 py-2 text-[12px] font-semibold text-white shadow-[0_0_22px_rgba(24,119,242,0.35)] transition-all duration-200 hover:bg-[#166FE5] hover:shadow-[0_0_28px_rgba(24,119,242,0.55)]"
+            className="rounded-lg bg-[#1877F2] px-3 py-2 text-[11px] font-semibold text-white shadow-[0_0_22px_rgba(24,119,242,0.35)] transition-all duration-200 hover:bg-[#166FE5] hover:shadow-[0_0_28px_rgba(24,119,242,0.55)] sm:px-5 sm:text-[12px]"
           >
-            Get Started
+            <span className="sm:hidden">Start</span>
+            <span className="hidden sm:inline">Get Started</span>
           </button>
         </div>
 

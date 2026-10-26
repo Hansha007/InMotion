@@ -71,7 +71,7 @@ function ShipmentDetails() {
 
   if (!shipment) {
     return (
-      <div className="min-h-[60vh] rounded-xl border border-[#18304A] bg-[#0B1728] p-8">
+      <main className="min-h-[60vh] rounded-xl border border-[#18304A] bg-[#0B1728] p-8">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#EF4444]">
           Shipment not found
         </p>
@@ -86,7 +86,7 @@ function ShipmentDetails() {
         >
           Back to Shipments
         </button>
-      </div>
+      </main>
     );
   }
 
@@ -96,7 +96,7 @@ function ShipmentDetails() {
     shipment.status === "ATTENTION";
 
   return (
-    <div className="min-w-0 space-y-6">
+    <main className="min-w-0 space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <button
@@ -340,7 +340,7 @@ function ShipmentDetails() {
           )}
         </section>
       </div>
-    </div>
+    </main>
   );
 }
 

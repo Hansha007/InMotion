@@ -39,7 +39,7 @@ function AuthLayout({ eyebrow, title, description, children, footer }) {
 			<div className="pointer-events-none absolute -right-32 -top-40 h-[460px] w-[460px] rounded-full bg-[#1477D4]/[0.08] blur-[130px]" />
 			<div className="pointer-events-none absolute bottom-[-220px] left-[-160px] h-[420px] w-[420px] rounded-full bg-[#0B3559]/[0.18] blur-[120px]" />
 
-			<div className="relative mx-auto flex min-h-[calc(100vh-3rem)] max-w-[1180px] flex-col">
+			<div className="relative mx-auto flex min-h-[calc(100dvh-3rem)] max-w-[1180px] flex-col">
 				<header className="flex items-center justify-between">
 					<Link to="/" className="group flex items-center gap-3" aria-label="Back to InMotion home">
 						<div className="drop-shadow-[0_0_12px_rgba(33,150,243,0.45)] transition-transform duration-300 group-hover:scale-105">

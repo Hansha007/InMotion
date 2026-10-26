@@ -1,14 +1,30 @@
 import {
+  Menu,
   Search,
   Bell,
   ChevronDown,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 
-function Topbar() {
+function Topbar({ isSidebarOpen, onMenuClick }) {
+  const [isCompactSearchOpen, setIsCompactSearchOpen] = useState(false);
+
   return (
-    <header className="fixed left-[248px] right-0 top-0 z-30 flex h-[72px] items-center border-b border-[#18304A] bg-[#020812]/95 px-6 backdrop-blur-md">
+    <header className="fixed left-[var(--sidebar-width)] right-0 top-0 z-30 flex h-[var(--topbar-height)] min-w-0 items-center gap-2 border-b border-[#18304A] bg-[#020812]/95 px-3 backdrop-blur-md sm:gap-3 sm:px-4 xl:px-6">
+      <button
+        type="button"
+        aria-label={isSidebarOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isSidebarOpen}
+        aria-controls="primary-navigation"
+        onClick={onMenuClick}
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[#A7B3C2] transition-colors hover:bg-[#0B1728] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2196F3] lg:hidden"
+      >
+        {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+
       {/* Search */}
-      <div className="flex w-[430px] items-center gap-3 rounded-lg border border-[#18304A] bg-[#07111F] px-3.5 py-2.5 transition-all duration-200 focus-within:border-[#2196F3]/60 focus-within:shadow-[0_0_20px_rgba(33,150,243,0.06)]">
+      <div className="hidden w-full min-w-0 max-w-[430px] flex-1 items-center gap-3 rounded-lg border border-[#18304A] bg-[#07111F] px-3.5 py-2.5 transition-all duration-200 focus-within:border-[#2196F3]/60 focus-within:shadow-[0_0_20px_rgba(33,150,243,0.06)] sm:flex">
         <Search
           size={17}
           strokeWidth={1.8}
@@ -26,26 +42,54 @@ function Topbar() {
           <span>K</span>
         </div>
       </div>
+      <button
+        type="button"
+        aria-label={isCompactSearchOpen ? "Close search" : "Open search"}
+        aria-expanded={isCompactSearchOpen}
+        onClick={() => setIsCompactSearchOpen((open) => !open)}
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[#8B9AAF] transition-colors hover:bg-[#0B1728] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2196F3] sm:hidden"
+      >
+        {isCompactSearchOpen ? <X size={18} /> : <Search size={18} />}
+      </button>
+      {isCompactSearchOpen && (
+        <div className="absolute left-3 right-3 top-[calc(100%+8px)] z-40 flex items-center gap-3 rounded-lg border border-[#18304A] bg-[#07111F] px-3.5 py-3 shadow-xl sm:hidden">
+          <Search size={17} className="shrink-0 text-[#7F91A8]" />
+          <input
+            autoFocus
+            type="search"
+            aria-label="Search shipments, vehicles, warehouses, and routes"
+            placeholder="Search shipments, vehicles, routes..."
+            className="min-w-0 flex-1 bg-transparent text-sm text-[#F5F7FA] outline-none placeholder:text-[#6F7D8E]"
+          />
+        </div>
+      )}
 
       {/* Right side */}
-      <div className="ml-auto flex h-full items-center">
+      <div className="ml-auto flex h-full shrink-0 items-center">
         {/* Network Live */}
-        <div className="flex items-center gap-2 px-5">
-          <span className="relative flex h-2.5 w-2.5">
+        <div
+          role="status"
+          aria-label="Network Live"
+          className="flex items-center gap-2 px-2 xl:px-5"
+        >
+          <span aria-hidden="true" className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-30" />
 
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E] shadow-[0_0_9px_rgba(34,197,94,0.65)]" />
           </span>
 
-          <span className="text-[11px] font-medium text-[#22C55E]">
+          <span
+            aria-hidden="true"
+            className="hidden text-[11px] font-medium text-[#22C55E] xl:inline"
+          >
             Network Live
           </span>
         </div>
 
-        <div className="h-8 w-px bg-[#18304A]" />
+        <div className="hidden h-8 w-px bg-[#18304A] xl:block" />
 
         {/* Last updated */}
-        <div className="px-5">
+        <div className="hidden px-5 xl:block">
           <p className="text-[9px] leading-3 text-[#6F7D8E]">
             Last updated
           </p>
@@ -55,13 +99,13 @@ function Topbar() {
           </p>
         </div>
 
-        <div className="h-8 w-px bg-[#18304A]" />
+        <div className="hidden h-8 w-px bg-[#18304A] xl:block" />
 
         {/* Notifications */}
         <button
           type="button"
           aria-label="Notifications"
-          className="group relative mx-3 flex h-10 w-10 items-center justify-center rounded-lg text-[#8B9AAF] transition-all duration-200 hover:bg-[#0B1728] hover:text-[#F5F7FA]"
+          className="group relative mx-1 flex h-10 w-10 items-center justify-center rounded-lg text-[#8B9AAF] transition-all duration-200 hover:bg-[#0B1728] hover:text-[#F5F7FA] sm:mx-3"
         >
           <Bell
             size={19}
@@ -79,7 +123,7 @@ function Topbar() {
         {/* Admin */}
         <button
           type="button"
-          className="group flex h-full items-center gap-3 px-4 transition-colors duration-200 hover:bg-[#07111F]"
+          className="group flex h-full items-center gap-2 px-2 transition-colors duration-200 hover:bg-[#07111F] sm:gap-3 sm:px-3 xl:px-4"
         >
           <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#18304A] bg-[#0B1728] text-[10px] font-semibold text-[#2196F3] transition-all duration-200 group-hover:border-[#2196F3]/40 group-hover:shadow-[0_0_14px_rgba(33,150,243,0.15)]">
             HM
@@ -100,7 +144,7 @@ function Topbar() {
           <ChevronDown
             size={14}
             strokeWidth={1.8}
-            className="ml-2 text-[#6F7D8E] transition-transform duration-200 group-hover:translate-y-0.5"
+            className="hidden text-[#6F7D8E] transition-transform duration-200 group-hover:translate-y-0.5 sm:block"
           />
         </button>
       </div>

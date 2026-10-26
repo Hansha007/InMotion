@@ -64,7 +64,7 @@ function ModernLogisticsSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#020812] via-transparent to-[#020812]/80" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-8 py-24 lg:px-12 lg:py-28">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-12 lg:gap-20">
           
           {/* Left Column: Heading & Summary */}

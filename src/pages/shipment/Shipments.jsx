@@ -6,17 +6,31 @@ import { useShipmentStore } from "../../store/shipmentStore";
 
 const statusStyles = {
   "ON TIME": "border-[#22C55E]/30 bg-[#22C55E]/10 text-[#22C55E]",
+  DELIVERED: "border-[#22C55E]/30 bg-[#22C55E]/10 text-[#22C55E]",
   "IN TRANSIT": "border-[#2196F3]/30 bg-[#2196F3]/10 text-[#2196F3]",
   "AT RISK": "border-[#FACC15]/30 bg-[#FACC15]/10 text-[#FACC15]",
-  ATTENTION: "border-[#F97316]/30 bg-[#F97316]/10 text-[#F97316]",
+  ATTENTION: "border-[#FACC15]/30 bg-[#FACC15]/10 text-[#FACC15]",
   DELAYED: "border-[#EF4444]/30 bg-[#EF4444]/10 text-[#EF4444]",
+  CANCELLED: "border-[#6F7D8E]/30 bg-[#6F7D8E]/10 text-[#A7B3C2]",
 };
 
 const priorityStyles = {
-  High: "text-[#EF4444]",
+  Critical: "text-[#EF4444]",
+  High: "text-[#FACC15]",
   Medium: "text-[#FACC15]",
   Low: "text-[#A7B3C2]",
 };
+
+function formatLastUpdated(timestamp) {
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Kolkata",
+  }).format(new Date(timestamp));
+}
 
 function StatusBadge({ status }) {
   return (
@@ -52,10 +66,9 @@ function Shipments() {
   const summary = useMemo(() => {
     return {
       total: shipments.length,
-      onTime: shipments.filter((shipment) => shipment.status === "ON TIME")
-        .length,
-      inTransit: shipments.filter(
-        (shipment) => shipment.status === "IN TRANSIT"
+      onTime: shipments.filter(
+        (shipment) =>
+          shipment.status === "ON TIME" || shipment.status === "DELIVERED"
       ).length,
       atRisk: shipments.filter(
         (shipment) =>
@@ -84,8 +97,9 @@ function Shipments() {
         ),
       },
       {
+        id: "route",
         header: "Route",
-        accessor: "route",
+        accessor: (row) => `${row.origin} → ${row.destination}`,
         sortable: true,
         cell: (row) => (
           <span className="text-[#F5F7FA]">
@@ -124,8 +138,10 @@ function Shipments() {
         header: "Last Updated",
         accessor: "lastUpdated",
         sortable: true,
+        cell: (row) => formatLastUpdated(row.lastUpdated),
       },
       {
+        id: "actions",
         header: "Actions",
         accessor: "id",
         cell: (row) => (
@@ -150,7 +166,7 @@ function Shipments() {
   };
 
   return (
-    <div className="min-w-0 space-y-6">
+    <main className="min-w-0 space-y-6 px-4 py-5 sm:px-6 sm:py-6">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2196F3]">
@@ -158,16 +174,17 @@ function Shipments() {
           </p>
 
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#F5F7FA]">
-            SHIPMENTS
+            Shipments
           </h1>
 
           <p className="mt-2 max-w-2xl text-sm text-[#A7B3C2]">
-            Monitor and manage every shipment across the logistics network.
+            Monitor and manage shipments across the network.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-3">
           <button
+            type="button"
             onClick={handleMarkPriority}
             disabled={selectedIds.length === 0}
             className="inline-flex items-center gap-2 rounded-lg border border-[#18304A] bg-[#07111F] px-4 py-2.5 text-sm font-medium text-[#F5F7FA] transition hover:border-[#2196F3] disabled:cursor-not-allowed disabled:opacity-40"
@@ -177,6 +194,7 @@ function Shipments() {
           </button>
 
           <button
+            type="button"
             onClick={() => navigate("/app/network")}
             className="inline-flex items-center gap-2 rounded-lg border border-[#18304A] bg-[#07111F] px-4 py-2.5 text-sm font-medium text-[#F5F7FA] transition hover:border-[#2196F3]"
           >
@@ -186,16 +204,16 @@ function Shipments() {
         </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid min-w-0 grid-cols-2 gap-3 xl:grid-cols-4">
         {[
-          ["Total", summary.total, "text-[#F5F7FA]", "#2196F3"],
+          ["Total Shipments", summary.total, "text-[#F5F7FA]", "#2196F3"],
           ["On Time", summary.onTime, "text-[#22C55E]", "#22C55E"],
           ["At Risk", summary.atRisk, "text-[#FACC15]", "#FACC15"],
           ["Delayed", summary.delayed, "text-[#EF4444]", "#EF4444"],
         ].map(([label, value, color, accent]) => (
           <div
             key={label}
-            className="rounded-xl border border-[#18304A] bg-[#0B1728] p-4"
+            className="flex h-28 min-w-0 flex-col justify-between rounded-xl border border-[#18304A] bg-[#0B1728] p-4 transition-colors hover:border-[#285074]"
           >
             <div className="flex items-center justify-between gap-3">
               <p className="text-[11px] uppercase tracking-[0.16em] text-[#6F7D8E]">
@@ -206,7 +224,7 @@ function Shipments() {
                 style={{ backgroundColor: accent }}
               />
             </div>
-            <p className={`mt-3 text-2xl font-bold ${color}`}>{value}</p>
+            <p className={`text-2xl font-bold ${color}`}>{value}</p>
           </div>
         ))}
       </div>
@@ -236,13 +254,15 @@ function Shipments() {
           <DataTable
             data={shipments}
             columns={columns}
+            searchFields={["id", "origin", "destination", "vehicle", "driver"]}
+            filterFields={["status", "priority", "vehicle"]}
             selectable
             onSelectionChange={setSelectedIds}
             emptyMessage="No shipments match the current filters."
           />
         </div>
       </section>
-    </div>
+    </main>
   );
 }
 

@@ -25,6 +25,7 @@ function Landing() {
         onSignup={() => openAuth("signup")}
       />
 
+      <main>
       {/* ================= HERO SECTION ================= */}
       <div className="relative min-h-screen w-full pt-[72px]">
         
@@ -46,7 +47,7 @@ function Landing() {
         </div>
 
         {/* Hero Interactive Container */}
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-72px)] max-w-[1440px] flex-col justify-between px-8 pb-6 pt-10 lg:pb-7 lg:pt-11">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100dvh-72px)] max-w-[1440px] flex-col justify-between px-4 pb-6 pt-8 sm:px-8 sm:pt-10 lg:pb-7 lg:pt-11">
           
           {/* Main Top Grid: Content (Left) & Network Map (Right) */}
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-6">
@@ -73,9 +74,9 @@ function Landing() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="hero-reveal-2 max-w-[620px] text-5xl font-bold leading-[0.98] tracking-[-0.035em] text-white sm:text-6xl lg:text-[64px] xl:text-[68px]">
-                <span className="block whitespace-nowrap">KEEP THE WORLD</span>
-                <span className="hero-reveal-3 block whitespace-nowrap text-[#2196F3]">
+              <h1 className="hero-reveal-2 max-w-[620px] text-[clamp(2rem,9vw,3rem)] font-bold leading-[0.98] tracking-[-0.035em] text-white sm:text-6xl lg:text-[64px] xl:text-[68px]">
+                <span className="block">KEEP THE WORLD</span>
+                <span className="hero-reveal-3 block text-[#2196F3]">
                   IN MOTION.
                 </span>
               </h1>
@@ -125,6 +126,7 @@ function Landing() {
 
       {/* ================= LOWER SECTION: BUILT FOR MODERN LOGISTICS ================= */}
       <ModernLogisticsSection />
+      </main>
 
       <LandingFooter />
 

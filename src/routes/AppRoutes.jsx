@@ -14,9 +14,15 @@ import Warehouses from "../pages/warehouse/Warehouses";
 import RoutesPage from "../pages/network/Routes";
 import About from "../pages/about/About";
 import Analytics from "../pages/analytics/Analytics";
+import Shipments from "../pages/shipment/Shipments";
+import ShipmentDetails from "../pages/shipment/ShipmentDetails";
 
 function Placeholder({ name }) {
-  return <h1>{name}</h1>;
+  return (
+    <main className="min-h-screen min-w-0 p-6 text-[#F5F7FA]">
+      <h1>{name}</h1>
+    </main>
+  );
 }
 
 function AppRoutes() {
@@ -88,12 +94,12 @@ function AppRoutes() {
 
           <Route
             index
-            element={<Placeholder name="Shipments" />}
+            element={<Shipments />}
           />
 
           <Route
             path=":shipmentId"
-            element={<Placeholder name="Shipment Details" />}
+            element={<ShipmentDetails />}
           />
 
         </Route>

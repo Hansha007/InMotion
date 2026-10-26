@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -61,17 +62,36 @@ const navItems = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ isOpen, onNavigate }) {
+  const [isNarrowViewport, setIsNarrowViewport] = useState(
+    () => window.matchMedia("(max-width: 1023px)").matches
+  );
+
+  useEffect(() => {
+    const layout = window.matchMedia("(max-width: 1023px)");
+    const handleLayoutChange = (event) => setIsNarrowViewport(event.matches);
+
+    layout.addEventListener("change", handleLayoutChange);
+    return () => layout.removeEventListener("change", handleLayoutChange);
+  }, []);
+
   return (
-    <aside className="fixed left-0 top-0 z-40 flex h-screen w-[248px] flex-col overflow-hidden border-r border-[#18304A] bg-[#07111F]">
+    <aside
+      aria-label="Main navigation"
+      aria-hidden={!isOpen && isNarrowViewport}
+      inert={!isOpen && isNarrowViewport}
+      className={`fixed left-0 top-0 z-50 flex h-dvh w-[min(300px,calc(100vw-48px))] flex-col overflow-hidden border-r border-[#18304A] bg-[#07111F] transition-transform duration-200 lg:w-[248px] lg:translate-x-0 ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       {/* Atmospheric glow */}
       <div className="pointer-events-none absolute -left-20 -top-20 h-[260px] w-[260px] rounded-full bg-[#2196F3]/[0.07] blur-[90px]" />
 
       <div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-full bg-gradient-to-t from-[#2196F3]/[0.025] to-transparent" />
 
       {/* Brand */}
-      <div className="relative flex h-[72px] shrink-0 items-center border-b border-[#18304A] px-5">
-        <div className="group mr-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2196F3] text-white shadow-[0_0_22px_rgba(33,150,243,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(33,150,243,0.4)]">
+      <div className="relative flex h-[var(--topbar-height)] shrink-0 items-center border-b border-[#18304A] px-5">
+        <div className="group mr-3 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2196F3] text-white shadow-[0_0_22px_rgba(33,150,243,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(33,150,243,0.4)]">
           <Route
             size={19}
             strokeWidth={2.4}
@@ -91,7 +111,7 @@ function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative flex-1 overflow-y-auto px-3 py-5">
+      <nav id="primary-navigation" className="relative flex-1 overflow-y-auto px-3 py-5">
         <div className="space-y-1.5">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -101,9 +121,10 @@ function Sidebar() {
                 key={item.path}
                 to={item.path}
                 end={item.end}
+                onClick={onNavigate}
                 className={({ isActive }) =>
                   [
-                    "group relative flex h-[42px] items-center gap-3 overflow-hidden rounded-lg px-3.5 transition-all duration-200",
+                    "group relative flex h-[44px] items-center gap-3 overflow-hidden rounded-lg px-3.5 transition-all duration-200",
                     isActive
                       ? "bg-[#2196F3]/20 text-[#F5F7FA] shadow-[0_0_18px_rgba(33,150,243,0.10)]"
                       : "text-[#A7B3C2] hover:bg-[#0F1D30] hover:text-[#F5F7FA]",

@@ -1307,7 +1307,7 @@ function Network() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#020812] px-5 pb-12 pt-[98px] text-[#F5F7FA] lg:ml-[248px] lg:px-7">
+    <main className="min-h-screen min-w-0 bg-[#020812] px-5 pb-12 text-[#F5F7FA] lg:px-7">
       <div className="mx-auto max-w-[1600px]">
         <NetworkHeader selectedTime={selectedTime} />
 
